@@ -1,0 +1,25 @@
+{
+    "name": "enscope/corelib",
+    "description": "In-house PHP library with useful classes.",
+    "keywords": ["php", "corelib", "utils"],
+    "license": "Unlicense",
+    "authors": [
+        {
+            "name": "Miroslav Hudak",
+            "email": "mhudak@enscope.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Corelib\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.4.0",
+    },
+    "suggest": {
+    },
+    "require-dev": {
+    }
+}
+
