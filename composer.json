@@ -18,7 +18,7 @@
         "php": ">=5.4.0"
     },
     "suggest": {
-    	"bitwasp/bitcoin-lib": "Suggested for some BitcoinUtils methods to work.",
+    	"bitwasp/bitcoin-lib": "Suggested for some BitcoinUtils methods to work."
     },
     "require-dev": {
     }
