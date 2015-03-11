@@ -44,6 +44,12 @@
 			 */
 			public static function generateAddress($xpub, $index = 0)
 			{
+				if (!class_exists('BitWasp\\BitcoinLib\\BIP32'))
+				{
+					// if class BIP32 is not available, trigger an error
+					trigger_error("Library BitWasp/bitcoin-lib-php is required to generate deterministic address",
+						E_USER_ERROR);
+				}
 				Console::debug("Generating address for XPUB '%s' index %d", $xpub, $index);
 				$address = BIP32::build_address($xpub, sprintf('0/%d', $index))[0];
 				Console::debug("Generated address (index %d): '%s'", $index, $address);

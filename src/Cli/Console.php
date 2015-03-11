@@ -2,7 +2,9 @@
 
     namespace Corelib\Cli
     {
-        /**
+	    use Corelib\Utils\StringUtils;
+
+	    /**
          * All static verbosity-level shorthands behave like printf().
          *
          * @method static void none(string $text)
@@ -12,6 +14,14 @@
          * @method static void info(string $text)
          * @method static void debug(string $text)
          * @method static void trace(string $text)
+	     *
+	     * @method static boolean isNoneEnabled()
+	     * @method static boolean isFatalEnabled()
+	     * @method static boolean isErrorEnabled()
+	     * @method static boolean isWarnEnabled()
+	     * @method static boolean isInfoEnabled()
+	     * @method static boolean isDebugEnabled()
+	     * @method static boolean isTraceEnabled()
          */
         class Console
         {
@@ -43,8 +53,7 @@
              */
             public static function log($text, $level)
             {
-                if ((PHP_SAPI == 'cli')
-                    && (self::$verbosity >= max(self::NONE, $level)))
+                if (self::isLevelEnabled($level))
                 {
                     $time = date('H:i:s');
                     \cli\err(sprintf('[%s] (%d) %s', $time, $level, $text));
@@ -53,12 +62,40 @@
 
             public static function __callStatic($name, $args)
             {
-                if (count($args)
-                    && array_key_exists(strtolower($name), self::$levels))
+                if (count($args))
                 {
-                    self::log(vsprintf(array_shift($args), $args), self::$levels[$name]);
+	                $level = strtolower($name);
+	                if (array_key_exists($level, self::$levels))
+	                {
+		                self::log(vsprintf(array_shift($args), $args), self::$levels[$level]);
+		                return (null);
+	                }
+
                 }
+                elseif (StringUtils::startsEndsWith($name, 'is', 'enabled'))
+                {
+	                $level = strtolower(substr($name, 2, strlen($name) - 9));
+	                if (array_key_exists($level, self::$levels))
+	                {
+		                return (self::isLevelEnabled(self::$levels[$level]));
+	                }
+                }
+
+	            return (null);
             }
+
+	        /**
+	         * Checks, if specified level will produce some output.
+	         *
+	         * @param int $level Verbosity level
+	         *
+	         * @return bool True, if there will be some output for this level
+	         */
+	        public static function isLevelEnabled($level)
+	        {
+		        return ((PHP_SAPI == 'cli')
+		                && (self::$verbosity >= max(self::NONE, $level)));
+	        }
 
             /**
              * @param int $verbosity

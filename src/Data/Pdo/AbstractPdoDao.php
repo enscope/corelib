@@ -85,16 +85,19 @@
 
             protected function logQueryParameters($params = null, $verbosity = Console::WARNING)
             {
-                if (is_array($params)
-                    && count($params))
-                {
-                    $logParams = [];
-                    foreach ($params as $key => $value)
-                    {
-                        $logParams[] = sprintf('"%s" => "%s"', $key, $value);
-                    }
-                    Console::log(sprintf("Parameters: [%s]", implode(';', $logParams)), $verbosity);
-                }
+	            if (Console::isLevelEnabled($verbosity))
+	            {
+		            if (is_array($params)
+		                && count($params))
+		            {
+			            $logParams = [];
+			            foreach ($params as $key => $value)
+			            {
+				            $logParams[] = sprintf('"%s" => "%s"', $key, $value);
+			            }
+			            Console::log(sprintf("+ parameters = [%s]", implode(';', $logParams)), $verbosity);
+		            }
+	            }
             }
 		}
 	}
