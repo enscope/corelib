@@ -46,7 +46,7 @@
 
 					foreach ($args as $resource)
 					{
-						if ($resource instanceof Disposable)
+						if ($resource instanceof DisposableInterface)
 						{
 							$resource->dispose();
 						}

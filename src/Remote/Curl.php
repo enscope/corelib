@@ -2,7 +2,7 @@
 
     namespace Corelib\Remote
     {
-	    use Corelib\Core\Disposable;
+	    use Corelib\Core\DisposableInterface;
 	    use Corelib\Core\Using;
 
 	    /**
@@ -46,7 +46,7 @@
 	     * @method static mixed TRACE(string $url, array $curl_opts = null)
 	     */
 	    class Curl
-        implements Disposable
+        implements DisposableInterface
         {
 		    //region --- Private members ---
 

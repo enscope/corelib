@@ -10,7 +10,7 @@
 		abstract class AbstractPdoDao
 		{
 			/**
-			 * @var /PDO Database connection
+			 * @var PDO Database connection
 			 */
 			protected $pdo;
 

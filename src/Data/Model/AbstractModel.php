@@ -2,11 +2,11 @@
 
 	namespace Corelib\Data\Model
 	{
-		use Corelib\Data\Hydratable;
+		use Corelib\Data\HydratableInterface;
 		use Corelib\Data\Hydrator;
 
 		abstract class AbstractModel
-		implements Hydratable
+		implements HydratableInterface
 		{
 			public function __construct($values = null, $map_id = null, $hints_only = false)
 			{

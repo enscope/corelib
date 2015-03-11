@@ -4,7 +4,7 @@
 	{
 		use Exception;
 
-		interface Disposable
+		interface DisposableInterface
 		{
 			/**
 			 * Called, when the instance is no longer needed

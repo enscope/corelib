@@ -18,7 +18,7 @@
 				return (self::$instance);
 			}
 
-			public function fromArray(Hydratable &$obj, $values, $map_id = null, $hints_only = false)
+			public function fromArray(HydratableInterface &$obj, $values, $map_id = null, $hints_only = false)
 			{
 				$this->assertHydratable($obj);
 				$hints = $obj->__fromArray($map_id) ?: [];
@@ -71,7 +71,7 @@
 				return ($obj);
 			}
 
-			public function toArray(Hydratable &$obj, $map_id = null, $hints_only = false)
+			public function toArray(HydratableInterface &$obj, $map_id = null, $hints_only = false)
 			{
 				$this->assertHydratable($obj);
 				$hints = $obj->__toArray($map_id) ?: [];
@@ -98,7 +98,7 @@
 						$value = $this->getProperty($obj, $p_hint);
 						if (is_object($value))
 						{
-							if (!($value instanceof Hydratable))
+							if (!($value instanceof HydratableInterface))
 							{
 								$valueClass = get_class($value);
 								throw new HydratorException("Hydrated class {$valueClass} must implement Corelib\\Data\\Hydratable interface.");
@@ -119,7 +119,7 @@
 
 			private function assertHydratable($obj)
 			{
-				if (!($obj instanceof Hydratable))
+				if (!($obj instanceof HydratableInterface))
 				{
 					$objClass = get_class($obj);
 					throw new HydratorException("Hydrated class {$objClass} must implement Corelib\\Data\\Hydratable interface.");
