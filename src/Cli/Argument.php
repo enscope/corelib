@@ -174,8 +174,15 @@
 						: $this->_defaultValue;
 					if ($this->_allowMultiple)
 					{
-						// in case of multiple values, method ALWAYS returns array
-						$result = is_array($result) ? $result : [$result];
+						if (null !== $result)
+						{
+							// in case of multiple values, method ALWAYS returns array
+							$result = is_array($result) ? $result : [$result];
+						}
+						else
+						{
+							$result = [];
+						}
 					}
 
 					return ($result);
