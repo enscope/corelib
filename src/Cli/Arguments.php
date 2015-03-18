@@ -94,7 +94,12 @@
 				$long = [];
 
 				$this->getopts($short, $long);
-				$this->setopts(getopt(implode('', $short), $long));
+				$this->setopts($this->__getopt(implode('', $short), $long));
+			}
+
+			protected function __getopt($short, $long)
+			{
+				return (getopt($short, $long));
 			}
 
 			private function resetInstance()

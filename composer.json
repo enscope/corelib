@@ -1,26 +1,31 @@
 {
-    "name": "enscope/corelib",
-    "description": "In-house PHP library with useful classes.",
-    "keywords": ["php", "corelib", "utils"],
-    "license": "Unlicense",
-    "authors": [
-        {
-            "name": "Miroslav Hudak",
-            "email": "mhudak@enscope.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Corelib\\": "src/"
-        }
-    },
-    "require": {
-        "php": ">=5.4.0"
-    },
-    "suggest": {
-    	"bitwasp/bitcoin-lib": "Suggested for some BitcoinUtils methods to work."
-    },
-    "require-dev": {
+  "name": "enscope/corelib",
+  "description": "In-house PHP library with useful classes.",
+  "keywords": [
+    "php",
+    "corelib",
+    "utils"
+  ],
+  "license": "Unlicense",
+  "authors": [
+    {
+      "name": "Miroslav Hudak",
+      "email": "mhudak@enscope.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Corelib\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.5.0"
+  },
+  "suggest": {
+    "bitwasp/bitcoin-lib": "Suggested for some BitcoinUtils methods to work."
+  }
 }
 
