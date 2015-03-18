@@ -4,6 +4,11 @@
 	{
 		use Exception;
 
+		/**
+		 * Class Using
+		 *
+		 * @package Corelib\Core
+		 */
 		class Using
 		{
 			/**
