@@ -165,11 +165,15 @@
 
 			public function dump($level = Console::INFO)
 			{
-				foreach ($this->_args as $name => $arg)
+				if (Console::isLevelEnabled($level))
 				{
-					$value = $arg->getValue();
-					Console::log(sprintf("%s = %s", $name, is_array($value)
-						? "'" . implode("', '", $value) . "'" : "'$value'"), $level);
+					Console::log("Command-line arguments:", $level);
+					foreach ($this->_args as $name => $arg)
+					{
+						$value = $arg->getValue();
+						Console::log(sprintf("  %s = %s", $name, is_array($value)
+							? "'" . implode("', '", $value) . "'" : "'$value'"), $level);
+					}
 				}
 			}
 
