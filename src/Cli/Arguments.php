@@ -47,32 +47,27 @@
 
 			public function process(
 				$show_usage_on_error = true,
-				$usage_argument = null)
+				$ignore_errors = [])
 			{
 				$this->parse();
 
-				if (($usage_argument !== null)
-					&& ($this[$usage_argument] === true)
-				)
+				if (is_array($ignore_errors))
 				{
-					$this->displayUsage();
-
-					return (false);
+					foreach ($ignore_errors as $opt)
+					{
+						// if one of these flags is specified,
+						// process always returns true and other processing
+						// is in the hands of client code
+						if ($this[$opt] === true)
+						{
+							return (true);
+						}
+					}
 				}
 
 				if ($this->hasErrors())
 				{
-					foreach ($this->getErrors() as $name => $error)
-					{
-						printf("$name: $error\n");
-					}
-
-					if ($show_usage_on_error)
-					{
-						echo "\n";
-						$this->displayUsage();
-					}
-
+					$this->displayErrors($show_usage_on_error);
 					return (false);
 				}
 
@@ -112,6 +107,23 @@
 					{
 						// if there was some error, add it to errors array
 						$this->_errors[$name] = $arg->getError();
+					}
+				}
+			}
+
+			public function displayErrors($show_usage = true)
+			{
+				if ($this->hasErrors())
+				{
+					foreach ($this->getErrors() as $name => $error)
+					{
+						printf("$name: $error\n");
+					}
+
+					if ($show_usage)
+					{
+						echo "\n";
+						$this->displayUsage();
 					}
 				}
 			}
