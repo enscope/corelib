@@ -34,14 +34,25 @@
 			}
 
 			/**
-			 * @param string   $name           Name of this argument in final object
-			 * @param string[] $options        Options assigned to this argument
-			 * @param bool     $allow_multiple Flags, if multiple values for this argument are allowed
+			 * @param string|Argument $name           Name of this argument in final object; optionally, passing
+			 *                                        Argument instance will directly add prepared instance and use
+			 *                                        name from this instance - other method arguments are then
+			 *                                        irrelevant
+			 * @param string[]        $options        Options assigned to this argument
+			 * @param bool            $allow_multiple Flags, if multiple values for this argument are allowed
 			 *
 			 * @return Argument Fluent interface to Argument instance
 			 */
 			public function add($name, $options, $allow_multiple = false)
 			{
+				if ($name instanceof Argument)
+				{
+					// if $name is instanceof Argument, it is actually
+					// an Argument, that needs to be added; name is used
+					// from this instance
+					return ($this->_args[$name->getName()] = $name);
+				}
+
 				return ($this->_args[$name] = new Argument($name, $options, $allow_multiple));
 			}
 
@@ -68,6 +79,7 @@
 				if ($this->hasErrors())
 				{
 					$this->displayErrors($show_usage_on_error);
+
 					return (false);
 				}
 
@@ -111,6 +123,11 @@
 				}
 			}
 
+			public function hasErrors()
+			{
+				return (count($this->_errors));
+			}
+
 			public function displayErrors($show_usage = true)
 			{
 				if ($this->hasErrors())
@@ -126,6 +143,11 @@
 						$this->displayUsage();
 					}
 				}
+			}
+
+			public function getErrors()
+			{
+				return ($this->_errors);
 			}
 
 			public function displayUsage()
@@ -151,16 +173,6 @@
 					printf("  %-{$maxOptsLength}s\t%s\n", $usage[0], $usage[1]);
 				}
 				echo "\n";
-			}
-
-			public function hasErrors()
-			{
-				return (count($this->_errors));
-			}
-
-			public function getErrors()
-			{
-				return ($this->_errors);
 			}
 
 			public function dump($level = Console::INFO)

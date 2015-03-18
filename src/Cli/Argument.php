@@ -165,6 +165,11 @@
 				return ([$uopts, $this->_description, $this->_defaultValue]);
 			}
 
+			public function getName()
+			{
+				return ($this->_name);
+			}
+
 			public function getValue()
 			{
 				if ($this->hasValue())
