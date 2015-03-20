@@ -9,8 +9,8 @@
   "license": "Unlicense",
   "authors": [
     {
-      "name": "Miroslav Hudak",
-      "email": "mhudak@enscope.com"
+      "name": "Miroslav Hudak (enscope, s.r.o.)",
+      "email": "mhudak@dev.enscope.com"
     }
   ],
   "autoload": {
